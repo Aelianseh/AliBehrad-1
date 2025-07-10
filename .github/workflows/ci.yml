@@ -21,6 +21,8 @@ jobs:
 
     - name: Install dependencies
       run: npm init
+      run: npm Install
+      run: npm start
 
     - name: Run tests
       run: npm test -- --watchAll=false
