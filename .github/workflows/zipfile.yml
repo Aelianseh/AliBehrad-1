@@ -1,6 +1,30 @@
+name: React CI + Release
+
+on:
+  push:
+    branches: [ first-branch ]
+
 jobs:
   build-and-test:
-    # ... your existing job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test -- --watchAll=false --passWithNoTests
+
+      - name: Build the app
+        run: npm run build
 
   zip-and-release:
     needs: build-and-test
@@ -8,18 +32,18 @@ jobs:
     if: github.ref == 'refs/heads/first-branch'
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Create zip of project
-      run: |
-        zip -r react-app.zip . -x "node_modules/" ".git/"
+      - name: Create ZIP (excluding node_modules and .git)
+        run: |
+          zip -r react-app.zip . -x "node_modules/" ".git/"
 
-    - name: Upload to GitHub release
-      uses: softprops/action-gh-release@v1
-      with:
-        tag_name: v1.0.${{ github.run_number }}
-        name: Release ${{ github.run_number }}
-        files: react-app.zip
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload ZIP to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v1.0.${{ github.run_number }}
+          name: Auto Release ${{ github.run_number }}
+          files: react-app.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
