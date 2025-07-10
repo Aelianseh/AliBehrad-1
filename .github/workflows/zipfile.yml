@@ -15,7 +15,7 @@ jobs:
       run: |
         zip -r react-app.zip . -x "node_modules/" ".git/"
 
-    - name: Upload to GitHub release
+    - name: Upload to GitHub release july 7
       uses: softprops/action-gh-release@v1
       with:
         tag_name: v1.0.${{ github.run_number }}

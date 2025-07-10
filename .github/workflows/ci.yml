@@ -1,5 +1,5 @@
-name: React CI
-
+name: React CI test
+ 
 on:
   push:
     branches: [ first-branch ]
