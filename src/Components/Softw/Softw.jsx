@@ -1,5 +1,4 @@
 import stylez from "./Softw.module.css"
-import ax from "./../../Assets/IMGs/PDMS-logo.png"
 function Softw(probs) {
     return (
         <div className={stylez.soft}>

@@ -1,5 +1,4 @@
 import stylez from "./Fields.module.css"
-import ax from "./../../Assets/IMGs/Design.jpg"
 function Fields(probs) {
     // console.log(probs.result);
     return (
