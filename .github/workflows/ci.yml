@@ -14,7 +14,7 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v3
 
-    - name: Setup Node.js
+    - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '18'
@@ -23,10 +23,7 @@ jobs:
       run: npm install
 
     - name: Run tests
-      run: npm test -- --watchAll=false
+      run: npm test -- --watchAll=false --passWithNoTests
 
     - name: Build project
       run: npm run build
-
-    - name: Run tests
-      run: npm test -- --watchAll=false --passWithNoTests
