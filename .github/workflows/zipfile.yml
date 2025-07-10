@@ -4,6 +4,9 @@ on:
   push:
     branches: [ first-branch ]
 
+permissions:
+  contents: write
+
 jobs:
   build-and-zip:
     runs-on: ubuntu-latest
@@ -33,8 +36,8 @@ jobs:
       - name: Upload ZIP as GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v1.0.${{ github.run_number }}
-          name: Auto Release ${{ github.run_number }}
+          tag_name: zip-${{ github.run_id }}
+          name: Auto Release ${{ github.run_id }}
           files: react-project.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
